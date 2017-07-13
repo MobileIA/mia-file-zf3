@@ -1,0 +1,39 @@
+{
+    "name": "mobileia/mia-file-zf3",
+    "description": "The library for Files in Zend Framework 3",
+    "version": "0.0.1",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matias Camiletti",
+            "homepage": "http://www.mobileia.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/MobileIA/authentication"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/MobileIA/mia-authentication-zf3.git"
+        }
+    ],
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "zendframework/zend-json": "^3.0",
+        "zendframework/zend-mvc-form": "^1.0",
+        "mobileia/auth": "^0.0",
+        "mobileia/mia-base-zf3": "^0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MIAFile\\": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    }
+}
+
