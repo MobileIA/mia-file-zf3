@@ -28,7 +28,11 @@ class FormMobileiaGallery extends FormMobileiaFile
     
     protected function insertChangeScript($element)
     {
-        $this->headScript->appendScript('mobileiaGalleryPhotos.'.$element->getName().'Val = ' .$element->getValue());
+        if($element->getValue() == ''){
+            $this->headScript->appendScript('mobileiaGalleryPhotos.'.$element->getName().'Val = [];');
+        }else{
+            $this->headScript->appendScript('mobileiaGalleryPhotos.'.$element->getName().'Val = ' .$element->getValue() . ';');
+        }
         $this->headScript->appendScript('if(mobileiaGalleryPhotos.'.$element->getName().'Val.length > 0){
             // Imprimir imagenes
             mobileiaGalleryPrintImages("'.$element->getName().'");
