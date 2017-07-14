@@ -11,9 +11,11 @@ return [
     'view_helpers' => [
         'aliases' => [
             'formMobileiaFile' => View\Helper\FormMobileiaFile::class,
+            'formMobileiaGallery' => View\Helper\FormMobileiaGallery::class,
         ],
         'factories' => [
             View\Helper\FormMobileiaFile::class => View\Helper\FormMobileiaFileFactory::class,
+            View\Helper\FormMobileiaGallery::class => View\Helper\FormMobileiaGalleryFactory::class,
         ],
     ]
 ];
