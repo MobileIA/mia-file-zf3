@@ -73,6 +73,20 @@ function mobileiaGalleryFunc(appId, elementId){
         contentType: false,
         cache: false,
         processData:false,
+        xhr: function(){
+            // Ocultamos mensaje de cargando...
+            $("#"+elementId+"_container_"+imageId+" p").hide();
+            var xhr = new window.XMLHttpRequest();
+            //Upload progress, request sending to server
+            xhr.upload.addEventListener("progress", function(evt){
+                if (evt.lengthComputable) {
+                    percentComplete = parseInt( (evt.loaded / evt.total * 100), 10);
+                    // Mostramos progressBar
+                    $("#"+elementId+"_progress_"+imageId+" div").css("width", percentComplete + "%");
+              }
+            }, false);
+            return xhr;
+        },
         success: function(data){
             // Resetear input
             $("#"+elementId+"_file").val("");
@@ -82,6 +96,9 @@ function mobileiaGalleryFunc(appId, elementId){
             }
             // Mostramos mensaje de que se cargo correctamente
             $("#"+elementId+"_container_"+imageId+" p").html("Cargado");
+            $("#"+elementId+"_container_"+imageId+" p").show();
+            // Ocultamos progressBar
+            $("#"+elementId+"_progress_"+imageId+"").hide();
             // Cargamos datos en el input oculto
             mobileiaGalleryPhotos[elementId+"Val"].push(data.response[0]);
             $("#"+elementId).val(JSON.stringify(mobileiaGalleryPhotos[elementId+"Val"]));
@@ -93,7 +110,7 @@ function mobileiaGalleryFunc(appId, elementId){
 function mobileiaGalleryShowImage(file, imageId, elementId){
     var reader = new FileReader();	
     reader.onload = function(e){
-        $("#"+elementId+"_gallery").append(\'<div id="\'+elementId+\'_container_\'+imageId+\'" class="item-image" style="display: inline-block;"><img id="\'+elementId+\'_image_\'+imageId+\'" src="\'+e.target.result+\'" style="width: 100px; height: 100px; object-fit: cover;" /><p class="text-center">Cargando...</p></div>\');
+        $("#"+elementId+"_gallery").append(\'<div id="\'+elementId+\'_container_\'+imageId+\'" class="item-image" style="display: inline-block;"><img id="\'+elementId+\'_image_\'+imageId+\'" src="\'+e.target.result+\'" style="width: 100px; height: 100px; object-fit: cover;" /><p class="text-center" style="display: none;">Cargando...</p><div id="\'+elementId+\'_progress_\'+imageId+\'" class="progress progress-sm active" style="width: 100px;margin-bottom: 5px;"><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div></div></div>\');
     };
     reader.readAsDataURL(file);
 }
