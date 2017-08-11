@@ -25,9 +25,11 @@ class FormMobileiaPhoto  extends FormMobileiaFile
         // Creamos galeria html
         $html = '<div id="'.$element->getName().'_photo_container" class="gallery"></div>';
         // Creamos el input visible para seleccionar archivo
-        $html .= '<input id="'.$element->getName().'_file" type="file" class="form-control">';
+        $html .= '<input id="'.$element->getName().'_file" type="file" class="form-control" style="display: none;">';
         // Creamos input para almacenar los datos
         $html .= '<input id="'.$element->getName().'" name="'.$element->getName().'" type="hidden" value="'.$element->getValue().'">';
+        // Creamos boton para mostrar
+        $html .= '<a id="'.$element->getName().'_button" class="btn btn-app" onclick="$(\'#'.$element->getName().'_file\').click();"><i class="fa fa-upload"></i> <span>Subir archivo</span></a>';
         // Devolvemos HTML
         return $html;
     }
@@ -80,6 +82,8 @@ function mobileiaPhotoFunc(appId, elementId){
             $("#"+elementId+"_container p").html("Cargado");
             // Cargamos datos en el input oculto
             $("#"+elementId).val("http://files.mobileia.com/" + data.response[0].path);
+            // Cambiamos nombre del boton
+            $("#"+elementId+"_button span").html("Cambiar");
         }	        
    });
 }
@@ -100,6 +104,7 @@ function mobileiaPhotoPrintImage(elementId){
     }
     
     $("#"+elementId+"_photo_container").append(\'<div id="\'+elementId+\'_container" data-element="\'+elementId+\'" class="item-image" style="display: inline-block;"><img id="\'+elementId+\'_image" src="\'+imageUrl+\'" style="width: 100px; height: 100px; object-fit: cover;" /><p class="text-center"></p></div>\');
+    $("#"+elementId+"_button span").html("Cambiar");
 }');
     }
 }

@@ -19,9 +19,11 @@ class FormMobileiaGallery extends FormMobileiaFile
         // Creamos galeria html
         $html = '<div id="'.$element->getName().'_gallery" class="gallery"></div>';
         // Creamos el input visible para seleccionar archivo
-        $html .= '<input id="'.$element->getName().'_file" type="file" class="form-control">';
+        $html .= '<input id="'.$element->getName().'_file" type="file" class="form-control" style="display: none;">';
         // Creamos input para almacenar los datos
         $html .= '<input id="'.$element->getName().'" name="'.$element->getName().'" type="hidden" value="'.$this->escapeHtmlAttr->__invoke($element->getValue()).'">';
+        // Creamos boton para mostrar
+        $html .= '<a id="'.$element->getName().'_button" class="btn btn-app" onclick="$(\'#'.$element->getName().'_file\').click();"><i class="fa fa-upload"></i> <span>Subir archivo</span></a>';
         // Devolvemos HTML
         return $html;
     }
@@ -83,6 +85,8 @@ function mobileiaGalleryFunc(appId, elementId){
             // Cargamos datos en el input oculto
             mobileiaGalleryPhotos[elementId+"Val"].push(data.response[0]);
             $("#"+elementId).val(JSON.stringify(mobileiaGalleryPhotos[elementId+"Val"]));
+            // Cambiamos nombre del boton
+            $("#"+elementId+"_button span").html("Subir otra");
         }	        
    });
 }
@@ -98,6 +102,10 @@ function mobileiaGalleryPrintImages(elementId){
     for(var i = 0; i < mobileiaGalleryPhotos[elementId+"Val"].length; i++){
         var image = mobileiaGalleryPhotos[elementId+"Val"][i];
         $("#"+elementId+"_gallery").append(\'<div id="\'+elementId+\'_container_\'+image.id+\'" data-element="\'+elementId+\'" data-num="\'+i+\'" class="item-image" style="display: inline-block;"><img id="\'+elementId+\'_image_\'+image.id+\'" src="\'+image.url+\'" style="width: 100px; height: 100px; object-fit: cover;" /><p class="text-center"><a href="#" onclick="return mobileiaGalleryDelete(this);">Eliminar</a></p></div>\');
+    }
+    if(mobileiaGalleryPhotos[elementId+"Val"].length > 0){
+        // Cambiamos nombre del boton
+        $("#"+elementId+"_button span").html("Subir otra");
     }
 }
 function mobileiaGalleryDelete(element){
