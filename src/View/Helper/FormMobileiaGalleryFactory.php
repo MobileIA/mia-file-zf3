@@ -16,6 +16,6 @@ class FormMobileiaGalleryFactory implements \Zend\ServiceManager\Factory\Factory
             $container = $container->get('ViewHelperManager');
         }
         // Creamos objeto
-        return new FormMobileiaGallery($container->get('headScript'), $container->get('escapeHtmlAttr'));
+        return new FormMobileiaGallery($container->get('headScript'), $container->get('escapeHtmlAttr'), $container->get('basePath'));
     }
 }

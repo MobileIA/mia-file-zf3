@@ -19,6 +19,11 @@ class FormMobileiaFile extends \Zend\View\Helper\AbstractHelper
      */
     protected $escapeHtmlAttr;
     /**
+     *
+     * @var \Zend\View\Helper\BasePath
+     */
+    protected $basePath;
+    /**
      * Verifica si ya se agrego el script en el layout
      * @var boolean
      */
@@ -27,11 +32,13 @@ class FormMobileiaFile extends \Zend\View\Helper\AbstractHelper
      * 
      * @param \Zend\View\Helper\HeadScript $headScript
      * @param \Zend\View\Helper\EscapeHtmlAttr $escapeHtmlAttr
+     * @param \Zend\View\Helper\BasePath $basePath
      */
-    public function __construct($headScript, $escapeHtmlAttr)
+    public function __construct($headScript, $escapeHtmlAttr, $basePath = null)
     {
         $this->headScript = $headScript;
         $this->escapeHtmlAttr = $escapeHtmlAttr;
+        $this->basePath = $basePath;
     }
     /**
      * 
