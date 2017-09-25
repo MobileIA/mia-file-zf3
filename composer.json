@@ -1,7 +1,7 @@
 {
     "name": "mobileia/mia-file-zf3",
     "description": "The library for Files in Zend Framework 3",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
