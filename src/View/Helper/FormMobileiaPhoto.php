@@ -29,7 +29,7 @@ class FormMobileiaPhoto  extends FormMobileiaFile
         // Creamos input para almacenar los datos
         $html .= '<input id="'.$element->getName().'" name="'.$element->getName().'" type="hidden" value="'.$element->getValue().'">';
         // Creamos boton para mostrar
-        $html .= '<a id="'.$element->getName().'_button" class="btn btn-app" onclick="$(\'#'.$element->getName().'_file\').click();"><i class="fa fa-upload"></i> <span>Subir archivo</span></a>';
+        $html .= '<a id="'.$element->getName().'_button" class="btn btn-app btn-success" onclick="$(\'#'.$element->getName().'_file\').click();"><i class="fa fa-upload"></i> <span>Subir archivo</span></a>';
         // Devolvemos HTML
         return $html;
     }
