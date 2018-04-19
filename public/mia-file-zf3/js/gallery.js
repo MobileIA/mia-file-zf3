@@ -42,7 +42,7 @@ miaFile._uploadFile = function(appId, elementId, file){
     miaFile.count++;
     // Llamada al servidor
     $.ajax({
-        url: "http://files.mobileia.com/api/upload",
+        url: "https://files.mobileia.com/api/upload",
         type: "POST",
         data:  miaFile._createFormData(appId, file),
         contentType: false,

@@ -65,7 +65,7 @@ function mobileiaPhotoFunc(appId, elementId){
     form_data.append("app_id", appId);
     // Llamada al servidor
     $.ajax({
-        url: "http://files.mobileia.com/api/upload",
+        url: "https://files.mobileia.com/api/upload",
         type: "POST",
         data:  form_data,
         contentType: false,
@@ -98,7 +98,7 @@ function mobileiaPhotoFunc(appId, elementId){
             // Ocultamos progressBar
             $("#"+elementId+"_progress").hide();
             // Cargamos datos en el input oculto
-            $("#"+elementId).val("http://files.mobileia.com/" + data.response[0].path);
+            $("#"+elementId).val("https://files.mobileia.com/" + data.response[0].path);
             // Cambiamos nombre del boton
             $("#"+elementId+"_button span").html("Cambiar");
         }	        

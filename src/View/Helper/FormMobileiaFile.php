@@ -99,7 +99,7 @@ class FormMobileiaFile extends \Zend\View\Helper\AbstractHelper
     $("#"+elementId+"_msg").html("Cargando archivo...");
     // Llamada al servidor
     $.ajax({
-        url: "http://files.mobileia.com/api/upload",
+        url: "https://files.mobileia.com/api/upload",
         type: "POST",
         data:  form_data,
         contentType: false,
