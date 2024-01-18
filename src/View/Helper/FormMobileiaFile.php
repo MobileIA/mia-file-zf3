@@ -91,15 +91,18 @@ class FormMobileiaFile extends \Zend\View\Helper\AbstractHelper
     // Crear formData
     var form_data = new FormData();
     // Adjuntamos datos del archivo seleccionado
-    form_data.append("file[0]", $("#"+elementId+"_file").prop("files")[0]);
-    // Adjuntamos AppID
-    form_data.append("app_id", appId);
+    var file = $("#"+elementId+"_file").prop("files")[0];
+    form_data.append("file[0]", file);
     // Mostrar mensaje de cargando
     $("#"+elementId+"_msg").show();
     $("#"+elementId+"_msg").html("Cargando archivo...");
+    // Generate File name
+    var date = new Date();
+    var timestamp = date.getTime();
+    var filenameDef = timestamp + '.' + file.name.replace(/ /g, "");
     // Llamada al servidor
     $.ajax({
-        url: "https://files.mobileia.com/api/upload",
+        url: "https://storage.googleapis.com/upload/storage/v1/b/gulch-files-public/o?uploadType=media&name=" + filenameDef,
         type: "POST",
         data:  form_data,
         contentType: false,
@@ -113,9 +116,12 @@ class FormMobileiaFile extends \Zend\View\Helper\AbstractHelper
                 return $("#"+elementId+"_msg").html("No se ha podido cargar el archivo");
             }
             // Mostramos mensaje de que se cargo correctamente
-            $("#"+elementId+"_msg").html("Cargado exitosamente: " + data.response[0].name);
+            $("#"+elementId+"_msg").html("Cargado exitosamente: " + data.name);
             // Cargamos datos en el input oculto
-            $("#"+elementId).val(JSON.stringify(data.response[0]));
+            $("#"+elementId).val(JSON.stringify({
+                id: data.generation,
+                url: "https://storage.googleapis.com/gulch-files-public/" + data.name,
+            }));
         }	        
    });
 }');

@@ -42,7 +42,7 @@ miaFile._uploadFile = function(appId, elementId, file){
     miaFile.count++;
     // Llamada al servidor
     $.ajax({
-        url: "https://files.mobileia.com/api/upload",
+        url: "https://storage.googleapis.com/upload/storage/v1/b/gulch-files-public/o?uploadType=media&name=" + miaFile._generateFilename(file),
         type: "POST",
         data:  miaFile._createFormData(appId, file),
         contentType: false,
@@ -75,7 +75,10 @@ miaFile._uploadFile = function(appId, elementId, file){
             // Ocultamos progressBar
             $("#"+elementId+"_progress_"+imageId+"").hide();
             // Cargamos datos en el input oculto
-            miaFile.photos[elementId+"Val"].push(data.response[0]);
+            miaFile.photos[elementId+"Val"].push({
+                id: data.generation,
+                url: 'https://storage.googleapis.com/gulch-files-public/' + data.name,
+            });
             $("#"+elementId).val(JSON.stringify(miaFile.photos[elementId+"Val"]));
             // Cambiamos nombre del boton
             $("#"+elementId+"_button span").html("Subir otra");
@@ -93,8 +96,6 @@ miaFile._createFormData = function(appId, file){
     var formData = new FormData();
     // Adjuntamos datos del archivo seleccionado
     formData.append("file[0]", file);
-    // Adjuntamos AppID
-    formData.append("app_id", appId);
     // Devolvemos formData
     return formData;
 };
@@ -153,4 +154,14 @@ miaFile.delete = function(element){
     // Cargamos datos al input
     $("#"+elementId).val(JSON.stringify(miaFile.photos[elementId+"Val"]));
     return false;
+};
+/**
+ * Genera el nombre del archivo con el timestamp
+ * @param File file 
+ * @returns 
+ */
+miaFile._generateFilename = function(file) {
+    var date = new Date();
+    var timestamp = date.getTime();
+    return timestamp + '.' + file.name.replace(/ /g, "");
 };

@@ -61,11 +61,13 @@ function mobileiaPhotoFunc(appId, elementId){
     var form_data = new FormData();
     // Adjuntamos datos del archivo seleccionado
     form_data.append("file[0]", file);
-    // Adjuntamos AppID
-    form_data.append("app_id", appId);
+    // Generate File name
+    var date = new Date();
+    var timestamp = date.getTime();
+    var filenameDef = timestamp + '.' + file.name.replace(/ /g, "");
     // Llamada al servidor
     $.ajax({
-        url: "https://files.mobileia.com/api/upload",
+        url: "https://storage.googleapis.com/upload/storage/v1/b/gulch-files-public/o?uploadType=media&name=" + filenameDef,
         type: "POST",
         data:  form_data,
         contentType: false,
@@ -98,7 +100,7 @@ function mobileiaPhotoFunc(appId, elementId){
             // Ocultamos progressBar
             $("#"+elementId+"_progress").hide();
             // Cargamos datos en el input oculto
-            $("#"+elementId).val("https://files.mobileia.com/" + data.response[0].path);
+            $("#"+elementId).val("https://storage.googleapis.com/gulch-files-public/" + data.name);
             // Cambiamos nombre del boton
             $("#"+elementId+"_button span").html("Cambiar");
         }	        
