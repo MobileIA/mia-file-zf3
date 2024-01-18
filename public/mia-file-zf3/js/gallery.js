@@ -161,7 +161,6 @@ miaFile.delete = function(element){
  * @returns 
  */
 miaFile._generateFilename = function(file) {
-    var date = new Date();
-    var timestamp = date.getTime();
-    return timestamp + '.' + file.name.replace(/ /g, "");
+    var now = new Date();
+    return now.getMilliseconds() + '_' + now.getFullYear() + now.getMonth() + now.getDay() + now.getHours() + '_' + file.name.replace(/ /g, "");
 };
