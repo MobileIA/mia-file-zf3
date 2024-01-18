@@ -107,10 +107,6 @@ class FormMobileiaFile extends \Zend\View\Helper\AbstractHelper
         success: function(data){
             // Resetear input  
             $("#"+elementId+"_file").val("");
-            if(!data.success){
-                // Mostrar mensaje de error
-                return $("#"+elementId+"_msg").html("No se ha podido cargar el archivo");
-            }
             // Mostramos mensaje de que se cargo correctamente
             $("#"+elementId+"_msg").html("Cargado exitosamente: " + data.name);
             // Cargamos datos en el input oculto

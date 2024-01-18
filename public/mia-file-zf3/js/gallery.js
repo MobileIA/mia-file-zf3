@@ -65,10 +65,6 @@ miaFile._uploadFile = function(appId, elementId, file){
         success: function(data){
             // Resetear input
             $("#"+elementId+"_file").val("");
-            if(!data.success){
-                // Mostrar mensaje de error
-                return $("#"+elementId+"_container_"+imageId+" p").html("Error");
-            }
             // Mostramos mensaje de que se cargo correctamente
             $("#"+elementId+"_container_"+imageId+" p").html("Cargado");
             $("#"+elementId+"_container_"+imageId+" p").show();

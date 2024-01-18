@@ -85,10 +85,6 @@ function mobileiaPhotoFunc(appId, elementId){
         success: function(data){
             // Resetear input
             $("#"+elementId+"_file").val("");
-            if(!data.success){
-                // Mostrar mensaje de error
-                return $("#"+elementId+"_container p").html("Error");
-            }
             // Mostramos mensaje de que se cargo correctamente
             $("#"+elementId+"_container p").html("Cargado");
             $("#"+elementId+"_container p").show();
