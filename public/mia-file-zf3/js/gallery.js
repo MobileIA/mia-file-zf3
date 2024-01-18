@@ -44,7 +44,7 @@ miaFile._uploadFile = function(appId, elementId, file){
     $.ajax({
         url: "https://storage.googleapis.com/upload/storage/v1/b/gulch-files-public/o?uploadType=media&name=" + miaFile._generateFilename(file),
         type: "POST",
-        data:  miaFile._createFormData(appId, file),
+        data:  file,
         contentType: false,
         cache: false,
         processData:false,

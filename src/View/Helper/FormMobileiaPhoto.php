@@ -57,10 +57,6 @@ function mobileiaPhotoFunc(appId, elementId){
     }
     // Mostrar imagen que se esta cargando.
     mobileiaPhotoShowImage(file, elementId);
-    // Crear formData
-    var form_data = new FormData();
-    // Adjuntamos datos del archivo seleccionado
-    form_data.append("file[0]", file);
     // Generate File name
     var now = new Date();
     var filenameDef = now.getMilliseconds() + "_" + now.getFullYear() + now.getMonth() + now.getDay() + now.getHours() + "_" + file.name.replace(/ /g, "");
@@ -68,7 +64,7 @@ function mobileiaPhotoFunc(appId, elementId){
     $.ajax({
         url: "https://storage.googleapis.com/upload/storage/v1/b/gulch-files-public/o?uploadType=media&name=" + filenameDef,
         type: "POST",
-        data:  form_data,
+        data:  file,
         contentType: false,
         cache: false,
         processData:false,

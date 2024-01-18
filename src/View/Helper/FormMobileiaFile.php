@@ -88,11 +88,8 @@ class FormMobileiaFile extends \Zend\View\Helper\AbstractHelper
     protected function insertFunctionScript()
     {
         $this->headScript->appendScript('function mobileiaFileFunc(appId, elementId){
-    // Crear formData
-    var form_data = new FormData();
     // Adjuntamos datos del archivo seleccionado
     var file = $("#"+elementId+"_file").prop("files")[0];
-    form_data.append("file[0]", file);
     // Mostrar mensaje de cargando
     $("#"+elementId+"_msg").show();
     $("#"+elementId+"_msg").html("Cargando archivo...");
@@ -103,7 +100,7 @@ class FormMobileiaFile extends \Zend\View\Helper\AbstractHelper
     $.ajax({
         url: "https://storage.googleapis.com/upload/storage/v1/b/gulch-files-public/o?uploadType=media&name=" + filenameDef,
         type: "POST",
-        data:  form_data,
+        data:  file,
         contentType: false,
         cache: false,
         processData:false,
